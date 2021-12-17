@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_android.dart';
 import 'package:day_night_time_picker/lib/day_night_timepicker_ios.dart';
@@ -73,6 +74,7 @@ PageRouteBuilder showPicker({
   required TimeOfDay value,
   required void Function(TimeOfDay) onChange,
   void Function(DateTime)? onChangeDateTime,
+  void Function()? onCancel,
   bool is24HrFormat = false,
   Color? accentColor,
   Color? unselectedColor,
@@ -84,8 +86,7 @@ PageRouteBuilder showPicker({
   Color barrierColor = Colors.black45,
   double? borderRadius,
   double? elevation,
-  EdgeInsets? dialogInsetPadding =
-      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+  EdgeInsets? dialogInsetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   bool displayHeader = true,
@@ -110,18 +111,14 @@ PageRouteBuilder showPicker({
     maxHour = is24HrFormat ? 23 : 12;
   }
 
-  assert(!(disableHour == true && disableMinute == true),
-      "Both \"disableMinute\" and \"disableHour\" cannot be true.");
-  assert(!(disableMinute == true && focusMinutePicker == true),
-      "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
+  assert(!(disableHour == true && disableMinute == true), "Both \"disableMinute\" and \"disableHour\" cannot be true.");
+  assert(!(disableMinute == true && focusMinutePicker == true), "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
   assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
   assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
   if (is24HrFormat) {
-    assert(maxHour <= 23 && minHour >= 0,
-        "\"minHour\" and \"maxHour\" should be between 0-23 for 24-hour format");
+    assert(maxHour <= 23 && minHour >= 0, "\"minHour\" and \"maxHour\" should be between 0-23 for 24-hour format");
   } else {
-    assert(maxHour <= 12 && minHour >= 1,
-        "\"minHour\" and \"maxHour\" should be between 1-12 for 12-hour format");
+    assert(maxHour <= 12 && minHour >= 1, "\"minHour\" and \"maxHour\" should be between 1-12 for 12-hour format");
   }
 
   return PageRouteBuilder(
@@ -133,6 +130,7 @@ PageRouteBuilder showPicker({
             value: value,
             onChange: onChange,
             onChangeDateTime: onChangeDateTime,
+            onCancel: onCancel,
             is24HrFormat: is24HrFormat,
             displayHeader: displayHeader,
             accentColor: accentColor,
@@ -165,6 +163,7 @@ PageRouteBuilder showPicker({
             value: value,
             onChange: onChange,
             onChangeDateTime: onChangeDateTime,
+            onCancel: onCancel,
             is24HrFormat: is24HrFormat,
             displayHeader: displayHeader,
             accentColor: accentColor,
@@ -295,8 +294,7 @@ Widget createInlinePicker({
   Color barrierColor = Colors.black45,
   double? borderRadius,
   double? elevation,
-  EdgeInsets? dialogInsetPadding =
-      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+  EdgeInsets? dialogInsetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   bool barrierDismissible = true,
   bool iosStylePicker = false,
   String hourLabel = 'hours',
@@ -321,18 +319,14 @@ Widget createInlinePicker({
     maxHour = is24HrFormat ? 23 : 12;
   }
 
-  assert(!(disableHour == true && disableMinute == true),
-      "Both \"disableMinute\" and \"disableHour\" cannot be true.");
-  assert(!(disableMinute == true && focusMinutePicker == true),
-      "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
+  assert(!(disableHour == true && disableMinute == true), "Both \"disableMinute\" and \"disableHour\" cannot be true.");
+  assert(!(disableMinute == true && focusMinutePicker == true), "Both \"disableMinute\" and \"focusMinutePicker\" cannot be true.");
   assert(maxMinute <= 59, "\"maxMinute\" must be less than or equal to 59");
   assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
   if (is24HrFormat) {
-    assert(maxHour <= 23 && minHour >= 0,
-        "\"minHour\" and \"maxHour\" should be between 0-23 for 24-hour format");
+    assert(maxHour <= 23 && minHour >= 0, "\"minHour\" and \"maxHour\" should be between 0-23 for 24-hour format");
   } else {
-    assert(maxHour <= 12 && minHour >= 1,
-        "\"minHour\" and \"maxHour\" should be between 1-12 for 12-hour format");
+    assert(maxHour <= 12 && minHour >= 1, "\"minHour\" and \"maxHour\" should be between 1-12 for 12-hour format");
   }
 
   if (iosStylePicker) {

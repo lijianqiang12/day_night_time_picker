@@ -23,6 +23,7 @@ class DayNightTimePickerIos extends StatefulWidget {
 
   /// _`Optional`_ Return the new time the user picked as [DateTime].
   final void Function(DateTime)? onChangeDateTime;
+  final void Function()? onCancel;
 
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
@@ -104,6 +105,7 @@ class DayNightTimePickerIos extends StatefulWidget {
     required this.value,
     required this.onChange,
     this.onChangeDateTime,
+    this.onCancel,
     this.is24HrFormat = false,
     this.displayHeader,
     this.accentColor,
@@ -333,6 +335,7 @@ class _DayNightTimePickerIosState extends State<DayNightTimePickerIos> {
   onCancel({var result}) {
     if (!widget.isInlineWidget) {
       Navigator.of(context).pop(result);
+      widget.onCancel?.call();
     } else {
       separateHoursAndMinutes();
     }
