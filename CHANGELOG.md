@@ -1,3 +1,21 @@
+## [1.0.5] - 3rd January 2021.
+
+- Fixed overflow issue on smaller devices
+- added Bool `ltrMode = true` for ltrMode `false = rtl` on Displaying the TextDirection
+- fixed issue where 24HrFormat is not used with iOS Styled Picker 
+
+## [1.0.4+1] - 29th December 2021.
+
+- Fixed import
+- Refactored
+
+## [1.0.4] - 28th December 2021.
+
+- Separate `TextStyle` for `ok` and `cancel` text.
+- Remove adding `.toUpperCase()` to `ok` and `cancel` text.
+- Bug fixes
+- Refactoring
+
 ## [1.0.3+1] - 28th July 2021.
 
 - Added `TextStyle` prop for ok/cancel button.
