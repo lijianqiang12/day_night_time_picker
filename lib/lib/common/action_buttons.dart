@@ -8,8 +8,7 @@ class ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final timeState = TimeModelBinding.of(context);
-    final color =
-        timeState.widget.accentColor ?? Theme.of(context).colorScheme.secondary;
+    final color = timeState.widget.accentColor ?? Theme.of(context).colorScheme.secondary;
 
     if (timeState.widget.isOnValueChangeMode) {
       return SizedBox(
@@ -19,8 +18,20 @@ class ActionButtons extends StatelessWidget {
 
     return Expanded(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        // mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: TextStyle(color: color),
+            ),
+            onPressed: timeState.onClear,
+            child: Text(
+              timeState.widget.clearText,
+              style: timeState.widget.clearStyle,
+            ),
+          ),
+
+          Spacer(),
           TextButton(
             style: TextButton.styleFrom(
               textStyle: TextStyle(color: color),

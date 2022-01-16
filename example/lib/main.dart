@@ -67,6 +67,12 @@ class _HomeState extends State<Home> {
                         onChangeDateTime: (DateTime dateTime) {
                           print(dateTime);
                         },
+                        onCancel: () {
+                          print("cancel");
+                        },
+                        onClear: () {
+                          print("clear");
+                        },
                       ),
                     );
                   },

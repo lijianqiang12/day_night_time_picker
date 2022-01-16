@@ -77,9 +77,11 @@ PageRouteBuilder showPicker({
   required void Function(TimeOfDay) onChange,
   void Function(DateTime)? onChangeDateTime,
   void Function()? onCancel,
+  void Function()? onClear,
   bool is24HrFormat = false,
   Color? accentColor,
   Color? unselectedColor,
+  String clearText = "Clear",
   String cancelText = "Cancel",
   String okText = "Ok",
   Image? sunAsset,
@@ -107,6 +109,7 @@ PageRouteBuilder showPicker({
   double maxHour = double.infinity,
   TextStyle okStyle = const TextStyle(fontWeight: FontWeight.bold),
   TextStyle cancelStyle = const TextStyle(fontWeight: FontWeight.bold),
+  TextStyle clearStyle = const TextStyle(fontWeight: FontWeight.bold),
 }) {
   if (minHour == double.infinity) {
     minHour = 0;
@@ -124,22 +127,17 @@ PageRouteBuilder showPicker({
 
   final timeValue = Time.fromTimeOfDay(value);
 
-
   return PageRouteBuilder(
     pageBuilder: (context, _, __) {
       if (iosStylePicker) {
         return Theme(
           data: themeData != null ? themeData : Theme.of(context),
-
           child: DayNightTimePickerIos(),
-
         );
       } else {
         return Theme(
           data: themeData != null ? themeData : Theme.of(context),
-
           child: DayNightTimePickerAndroid(),
-
         );
       }
     },
@@ -161,10 +159,13 @@ PageRouteBuilder showPicker({
           isInlineWidget: false,
           onChange: onChange,
           onChangeDateTime: onChangeDateTime,
+          onCancel: onCancel,
+          onClear: onClear,
           is24HrFormat: is24HrFormat,
           displayHeader: displayHeader,
           accentColor: accentColor,
           unselectedColor: unselectedColor,
+          clearText: clearText,
           cancelText: cancelText,
           okText: okText,
           sunAsset: sunAsset,
@@ -183,6 +184,7 @@ PageRouteBuilder showPicker({
           focusMinutePicker: focusMinutePicker,
           okStyle: okStyle,
           cancelStyle: cancelStyle,
+          clearStyle: clearStyle,
           hourLabel: hourLabel,
           minuteLabel: minuteLabel,
           ltrMode: ltrMode,
@@ -314,7 +316,6 @@ Widget createInlinePicker({
   assert(minMinute >= 0, "\"minMinute\" must be greater than or equal to 0");
 
   assert(maxHour <= 23 && minHour >= 0, "\"minHour\" and \"maxHour\" should be between 0-23");
-
 
   final timeValue = Time.fromTimeOfDay(value);
 

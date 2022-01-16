@@ -24,6 +24,8 @@ class FilterWrapper extends StatelessWidget {
 
     if (blurAmount == 0.0) {
       return Container(
+
+        constraints: BoxConstraints(maxWidth: 420), //liq
         child: child,
       );
     }

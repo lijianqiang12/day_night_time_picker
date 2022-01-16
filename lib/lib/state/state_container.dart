@@ -14,6 +14,8 @@ class TimeModelBinding extends StatefulWidget {
 
   /// _`Optional`_ Return the new time the user picked as [DateTime].
   final void Function(DateTime)? onChangeDateTime;
+  final void Function()? onCancel;
+  final void Function()? onClear;
 
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
@@ -26,6 +28,9 @@ class TimeModelBinding extends StatefulWidget {
 
   /// Accent color of unselected text.
   final Color? unselectedColor;
+
+  /// Text displayed for the Clear button.
+  String clearText;
 
   /// Text displayed for the Cancel button.
   String cancelText;
@@ -96,6 +101,9 @@ class TimeModelBinding extends StatefulWidget {
   /// Cancel button's text style [TextStyle]
   TextStyle cancelStyle;
 
+  /// Clear button's text style [TextStyle]
+  TextStyle clearStyle;
+
   /// The child [Widget] to render
   final Widget child;
 
@@ -105,12 +113,15 @@ class TimeModelBinding extends StatefulWidget {
     required this.initialTime,
     required this.child,
     required this.onChange,
+    this.onCancel,
+    this.onClear,
     this.onChangeDateTime,
     this.is24HrFormat = false,
     this.displayHeader,
     this.accentColor,
     this.ltrMode = true,
     this.unselectedColor,
+    this.clearText = "Clear",
     this.cancelText = "cancel",
     this.okText = "ok",
     this.isOnValueChangeMode = false,
@@ -133,6 +144,7 @@ class TimeModelBinding extends StatefulWidget {
     this.focusMinutePicker = false,
     this.okStyle: const TextStyle(fontWeight: FontWeight.bold),
     this.cancelStyle: const TextStyle(fontWeight: FontWeight.bold),
+    this.clearStyle: const TextStyle(fontWeight: FontWeight.bold),
   }) : super(key: key);
 
   @override
@@ -140,8 +152,7 @@ class TimeModelBinding extends StatefulWidget {
 
   /// Get the [InheritedWidget]'s state in the tree
   static TimeModelBindingState of(BuildContext context) {
-    final _ModelBindingScope scope =
-        context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
+    final _ModelBindingScope scope = context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
     return scope.modelBindingState;
   }
 }
@@ -236,8 +247,7 @@ class TimeModelBindingState extends State<TimeModelBinding> {
     widget.onChange(time.toTimeOfDay());
     if (widget.onChangeDateTime != null) {
       final now = DateTime.now();
-      final dateTime =
-          DateTime(now.year, now.month, now.day, time.hour, time.minute);
+      final dateTime = DateTime(now.year, now.month, now.day, time.hour, time.minute);
       widget.onChangeDateTime!(dateTime);
     }
     onCancel(result: time.toTimeOfDay());
@@ -245,6 +255,15 @@ class TimeModelBindingState extends State<TimeModelBinding> {
 
   /// Handler to close the picker
   onCancel({var result}) {
+    widget.onCancel?.call();
+    if (!widget.isInlineWidget) {
+      Navigator.of(context).pop(result);
+    }
+  }
+
+  /// Handler to close the picker
+  onClear({var result}) {
+    widget.onClear?.call();
     if (!widget.isInlineWidget) {
       Navigator.of(context).pop(result);
     }
