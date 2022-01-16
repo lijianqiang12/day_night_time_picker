@@ -16,7 +16,7 @@ class TimeModelBinding extends StatefulWidget {
   final void Function(DateTime)? onChangeDateTime;
   final void Function()? onCancel;
   final void Function()? onClear;
-
+final double? maxWidth;
   /// Show the time in TimePicker in 24 hour format.
   final bool is24HrFormat;
 
@@ -124,6 +124,7 @@ class TimeModelBinding extends StatefulWidget {
     this.clearText = "Clear",
     this.cancelText = "cancel",
     this.okText = "ok",
+    this.maxWidth,
     this.isOnValueChangeMode = false,
     this.sunAsset,
     this.moonAsset,

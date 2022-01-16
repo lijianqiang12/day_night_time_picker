@@ -45,6 +45,7 @@ class DayNightTimePickerAndroidState extends State<DayNightTimePickerAndroid> {
       child: SingleChildScrollView(
         physics: currentOrientation == Orientation.portrait ? NeverScrollableScrollPhysics() : AlwaysScrollableScrollPhysics(),
         child: FilterWrapper(
+          maxWidth: ,
           child: WrapperDialog(
             child: Column(
               mainAxisSize: MainAxisSize.min,
