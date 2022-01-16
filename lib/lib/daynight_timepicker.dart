@@ -102,6 +102,7 @@ PageRouteBuilder showPicker({
   bool disableHour = false,
   double minMinute = 0,
   double maxMinute = 59,
+  double? maxWidth,
   ThemeData? themeData,
   bool focusMinutePicker = false,
   // Infinity is used so that we can assert whether or not the user actually set a value
@@ -161,6 +162,7 @@ PageRouteBuilder showPicker({
           onChangeDateTime: onChangeDateTime,
           onCancel: onCancel,
           onClear: onClear,
+          maxWidth: maxWidth,
           is24HrFormat: is24HrFormat,
           displayHeader: displayHeader,
           accentColor: accentColor,
