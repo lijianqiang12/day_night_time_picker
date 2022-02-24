@@ -32,6 +32,7 @@ class ActionButtons extends StatelessWidget {
           ),
 
           Spacer(),
+
           TextButton(
             style: TextButton.styleFrom(
               textStyle: TextStyle(color: color),
@@ -42,6 +43,7 @@ class ActionButtons extends StatelessWidget {
               style: timeState.widget.cancelStyle,
             ),
           ),
+
           TextButton(
             onPressed: timeState.onOk,
             child: Text(
